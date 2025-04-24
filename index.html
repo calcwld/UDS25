@@ -1,1 +1,107 @@
+library(htmltools)
+library(tidyverse)
+
+# Set up Blackcaps colours
+blackcaps_black <- "#111111"
+blackcaps_blue <- "#0099cc"
+silver_fern <- "#bfc1c2"
+
+# HTML content
+page <- tags$html(
+  lang = "en",
+  tags<head>(
+    tags$meta(charset = "UTF-8"),
+    tags$title("Blackcaps Cricket Fan Page"),
+    tags$style(HTML(glue::glue("
+      body {{
+        background: {blackcaps_black};
+        color: #fff;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }}
+      header {{
+        background: #222;
+        padding: 2rem 1rem 1rem 1rem;
+        text-align: center;
+        border-bottom: 4px solid {blackcaps_blue};
+      }}
+      h1 {{
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+        margin: 0;
+      }}
+      .fern {{
+        font-size: 3rem;
+        color: {silver_fern};
+        margin: 1rem 0;
+      }}
+      nav {{
+        text-align: center;
+        margin: 1rem 0;
+      }}
+      nav a {{
+        color: {blackcaps_blue};
+        text-decoration: none;
+        margin: 0 1rem;
+        font-weight: bold;
+        transition: color 0.2s;
+      }}
+      nav a:hover {{
+        color: #fff;
+      }}
+      main {{
+        max-width: 600px;
+        margin: 2rem auto;
+        background: #181818;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      }}
+      h2 {{
+        color: {blackcaps_blue};
+        margin-top: 0;
+      }}
+      footer {{
+        text-align: center;
+        color: #888;
+        padding: 1rem 0;
+        font-size: 0.9rem;
+        border-top: 1px solid #222;
+        margin-top: 2rem;
+      }}
+    ")))
+  ),
+  tags$body(
+    tags$header(
+      tags$div(class = "fern", "\U1F33F"), # Unicode leaf
+      tags$h1("Blackcaps Cricket"),
+      tags$nav(
+        tags$a(href = "#", "Home"),
+        tags$a(href = "#", "Players"),
+        tags$a(href = "#", "Fixtures"),
+        tags$a(href = "#", "History")
+      )
+    ),
+    tags$main(
+      tags$h2("Welcome to the Home of New Zealand Cricket"),
+      tags$p(
+        "The ", tags$strong("Blackcaps"), 
+        " are New Zealand's national cricket team, known for their iconic black kit and the silver fern. Whether it's Tests, ODIs, or T20s, the Blackcaps bring excitement and skill to the pitch."
+      ),
+      tags$ul(
+        tags$li(tags$strong("Team Colors:"), " Black kit with blue accents and silver fern"),
+        tags$li(tags$strong("Nickname:"), " Blackcaps"),
+        tags$li(tags$strong("World Test Champions 2021"))
+      ),
+      tags$p("Stay tuned for the latest fixtures, player stats, and match results!")
+    ),
+    tags$footer(
+      "\U00A9 2025 Blackcaps Cricket Fan Page. Not affiliated with New Zealand Cricket."
+    )
+  )
+)
+
+# Save to HTML file
+save_html(page, "blackcaps_cricket.html")
 
